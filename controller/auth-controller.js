@@ -2,6 +2,7 @@ const prisma = require("../models/prisma");
 const bcrypt = require("bcryptjs");
 exports.register = async (req, res, next) => {
   const { user, pw, mail } = req.body;
+  console.log(user,pw,mail)
   try {
     const hashedPw = await bcrypt.hash(pw, 10);
 
@@ -12,8 +13,10 @@ exports.register = async (req, res, next) => {
         email: mail,
       },
     });
+    console.log(result)
     res.json(result);
   } catch (error) {
+    console.log(error)
     next(error);
   }
 };
